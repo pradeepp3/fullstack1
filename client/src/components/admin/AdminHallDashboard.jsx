@@ -5,6 +5,8 @@ import { Navigate, useParams, useLocation, Link } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { useAdminDashboard, useCalendarUtils } from '../../hooks/useAdminDashboard';
 
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+
 const AdminHallDashboard = () => {
   const { hallId } = useParams();
   const location = useLocation();
@@ -60,7 +62,7 @@ const AdminHallDashboard = () => {
       
       const endpoint = hallId || hallTypeMap[hallName] || 'convention-center';
       const params = new URLSearchParams({ dateRange, status });
-      const url = `/api/${endpoint}/admin/download-report?${params}`;
+      const url = `${API_BASE_URL}/${endpoint}/admin/download-report?${params}`;
       
       const response = await fetch(url, {
         method: 'GET',

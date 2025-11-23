@@ -2,6 +2,8 @@
 import React, { useState, useEffect } from 'react';
 import { api } from '../../services/api';
 
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+
 const LabAdminFixed = () => {
   const [stats, setStats] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -25,7 +27,7 @@ const LabAdminFixed = () => {
       const token = localStorage.getItem('token');
       const params = new URLSearchParams({ dateRange, status });
       
-      const response = await fetch(`/api/lab/admin/download-report?${params}`, {
+      const response = await fetch(`${API_BASE_URL}/lab/admin/download-report?${params}`, {
         method: 'GET',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -66,7 +68,7 @@ const LabAdminFixed = () => {
         status 
       });
       
-      const response = await fetch(`/api/lab/admin/export-bookings?${params}`, {
+      const response = await fetch(`${API_BASE_URL}/lab/admin/export-bookings?${params}`, {
         method: 'GET',
         headers: {
           'Authorization': `Bearer ${token}`,

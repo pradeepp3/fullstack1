@@ -4,6 +4,8 @@ import { Navigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { api } from '../../services/api';
 
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+
 const VideoConferenceAdmin = () => {
   const { admin, loading: authLoading } = useAuth();
   const [bookings, setBookings] = useState([]);
@@ -263,7 +265,7 @@ const VideoConferenceAdmin = () => {
       }
       
       const params = new URLSearchParams({ dateRange, status });
-      const url = `/api/video-conference/admin/download-report?${params}`;
+      const url = `${API_BASE_URL}/video-conference/admin/download-report?${params}`;
       
       const response = await fetch(url, {
         method: 'GET',

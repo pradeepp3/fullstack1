@@ -2,6 +2,8 @@
 import React, { useState, useEffect } from 'react';
 import { api } from '../../services/api';
 
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+
 const MBASeminarAdmin = () => {
   const [bookings, setBookings] = useState([]);
   const [stats, setStats] = useState(null);
@@ -277,7 +279,7 @@ const MBASeminarAdmin = () => {
       }
       
       const params = new URLSearchParams({ dateRange, status });
-      const url = `/api/mba-seminar/admin/download-report?${params}`;
+      const url = `${API_BASE_URL}/mba-seminar/admin/download-report?${params}`;
       
       const response = await fetch(url, {
         method: 'GET',
